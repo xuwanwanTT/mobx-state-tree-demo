@@ -3,10 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import TodoStore from "./models/todos";
+import TodoStore from './models/mytodos.js';
+import { getSnapshot } from 'mobx-state-tree';
+
+let snapshot = {
+  todos: [
+    {
+      text: "learn Mobx",
+      completed: false,
+      id: 0
+    },
+    {
+      text: "learn MST",
+      completed: false,
+      id: 1
+    }
+  ]
+};
+
+const store = (window.store = TodoStore.create(snapshot));
+
+console.log(getSnapshot(store));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>,
   document.getElementById('root')
 );
